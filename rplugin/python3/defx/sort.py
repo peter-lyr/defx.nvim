@@ -90,10 +90,16 @@ def _time(
     return (int(candidate['action__path'].stat().st_mtime)
             if readable(candidate['action__path']) else 0)
 
+def _ctime(
+        candidate: typing.Dict[str, typing.Any]
+) -> typing.Any:
+    return (int(candidate['action__path'].stat().st_ctime)
+            if readable(candidate['action__path']) else 0)
 
 SORT_KEY_METHODS = {
     'extension': _extension,
     'filename': _filename,
     'size': _size,
     'time': _time,
+    'ctime': _ctime,
 }
